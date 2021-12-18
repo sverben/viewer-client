@@ -50,6 +50,7 @@ class View {
             main.position[0] += Math.round((main.mousePos[0] - ev.layerX) / main.blockSize);
             main.position[1] += Math.round((main.mousePos[1] - ev.layerY) / main.blockSize);
             main.mousePos = [ev.layerX, ev.layerY];
+            this.update();
         })
 
     }
@@ -72,6 +73,7 @@ class View {
     updateChunk(chunkX, chunkZ, chunk) {
         if (typeof this.world[chunkX] == "undefined") this.world[chunkX] = {};
         this.world[chunkX][chunkZ] = chunk;
+        this.update();
     }
 
     requestChunk(x, z) {
@@ -192,6 +194,6 @@ window.addEventListener("load", () => {
             }
 
             view = new View(canvas, ip);
-            setInterval(() => {view.update()}, 1000 / 30);
+            view.update();
         })
 })
